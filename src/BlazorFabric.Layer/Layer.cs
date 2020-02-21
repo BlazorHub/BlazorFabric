@@ -2,6 +2,7 @@
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,11 +13,8 @@ namespace BlazorFabric
     // to send the LayerHost to anywhere in the app and render items to it.
 
     public class Layer : FabricComponentBase, IDisposable
-    {
-        //internal LayerBase() { }
-
+    {        
         [Inject] private IJSRuntime JSRuntime { get; set; }
-        //[Inject] private IComponentContext ComponentContext { get; set; }
         
         [Parameter] public RenderFragment ChildContent { get; set; }
 
@@ -59,6 +57,7 @@ namespace BlazorFabric
 
         public void Dispose()
         {
+            Debug.WriteLine($"Layer disposed: {this.id}");
             LayerHost.RemoveHostedContent(this.id);
             addedToHost = false;
         }

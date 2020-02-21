@@ -54,19 +54,19 @@ namespace BlazorFabric
             {
                 System.Diagnostics.Debug.WriteLine($"Adding new layer: {layerId}, {portalFragments.Count} layer(s) in host currently.");
                 portalFragments.Add((layerId, renderFragment, style)); //should render the first time and not after unless explicitly set.
-                StateHasChanged();
+                InvokeAsync(StateHasChanged);
             }
            
         }
 
         public void RemoveHostedContent(string layerId)
         {
-            System.Diagnostics.Debug.WriteLine($"Disposing layer: {layerId}");
+            System.Diagnostics.Debug.WriteLine($"Disposing layer contents: {layerId}");
             portalFragments.Remove(portalFragments.First(x => x.id == layerId));
             if (portals.ContainsKey(layerId))
                 portals.Remove(layerId);
             portalSequenceStarts.Remove(layerId);
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
 

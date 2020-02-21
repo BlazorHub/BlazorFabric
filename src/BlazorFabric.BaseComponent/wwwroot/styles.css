@@ -118,6 +118,7 @@
 }
 
 :root {
+    --semanticColors-ActionLink: var(--palette-NeutralPrimary);
     --semanticColors-BodyBackground: var(--palette-White);
     --semanticColors-BodyFrameBackground: var(--palette-White);
     --semanticColors-BodyFrameDivider: var(--palette-NeutralLight);
@@ -131,6 +132,12 @@
     --semanticColors-DisabledBodySubtext: var(--palette-NeutralQuaternary);
     --semanticColors-FocusBorder: var(--palette-Black);
     --semanticColors-ErrorText: var(--palette-RedDark);
+    --semanticColors-WarningText: #333333;
+    --semanticColors-ErrorBackground: rgba(245,135,145,0.2); /*rgba(232,17,35,0.2);*/
+    --semanticColors-BlockingBackground: rgba(250,65,0,0.2); /*rgba(234,67,0,0.2);*/
+    --semanticColors-WarningBackground: rgba(255, 200, 10, .2); /*rgba(255,185,0,0.2);*/
+    --semanticColors-WarningHighlight: #ffb900;
+    --semanticColors-SuccessBackground: rgba(95,210,85,0.2); /*rgba(186,216,10,0.2);*/
     /*ErrorText = !isInverted ? RedDark : "#ff5f5f";
     WarningText = !isInverted ? "#333333" : "#ffffff";
     ErrorBackground = !isInverted ? "rgba(232; 17; 35; .2)" : "rgba(232; 17; 35; .5)";
@@ -147,13 +154,14 @@
     --semanticColors-InputFocusBorderAlt: var(--palette-ThemePrimary);
     --semanticColors-SmallInputBorder: var(--palette-NeutralSecondary);
     --semanticColors-InputPlaceholderText: var(--palette-NeutralSecondary);
-    --semanticColors-ButtonBackground: var(--palette-NeutralLighter);
+    --semanticColors-ButtonBackground: var(--neutralColors-White);
     --semanticColors-ButtonBackgroundChecked: var(--palette-NeutralTertiaryAlt);
-    --semanticColors-ButtonBackgroundHovered: var(--palette-NeutralLight);
+    --semanticColors-ButtonBackgroundHovered: var(--palette-NeutralLighter);
+    --semanticColors-ButtonBackgroundPressed: var(--palette-NeutralLight);
     --semanticColors-ButtonBackgroundCheckedHovered: var(--palette-NeutralLight);
     --semanticColors-ButtonBorder: var(--palette-"transparent");
     --semanticColors-ButtonText: var(--palette-NeutralPrimary);
-    --semanticColors-ButtonTextHovered: var(--palette-Black);
+    --semanticColors-ButtonTextHovered: var(--palette-NeutralDark);
     --semanticColors-ButtonTextChecked: var(--palette-NeutralDark);
     --semanticColors-ButtonTextCheckedHovered: var(--palette-Black);
     --semanticColors-MenuItemBackgroundHovered: var(--palette-NeutralLighter);
@@ -169,6 +177,11 @@
     --semanticColors-ListHeaderBackgroundPressed: var(--palette-NeutralLight);
     --semanticColors-Link: var(--palette-ThemePrimary);
     --semanticColors-LinkHovered: var(--palette-ThemeDarker);
+    --semanticColors-PrimaryButtonBackground: var(--communicationColors-Primary);
+    --semanticColors-PrimaryButtonBackgroundHovered: var(--communicationColors-Shade10);
+    --semanticColors-PrimaryButtonBackgroundPressed: var(--communicationColors-Shade20);
+    --semanticColors-PrimaryButtonBackgroundDisabled: var(--palette-NeutralLighter);
+    --semanticColors-PrimaryButtonText: var(--neutralColors-White);
 }
 
 :root{
@@ -189,17 +202,19 @@
 
 :root {
     --fontSize-Mini: 10px;
-    --fontSize-XSmall: 11px;
+    --fontSize-XSmall: 10px;
     --fontSize-Small: 12px;
-    --fontSize-SmallPlus: 13px;
+    --fontSize-SmallPlus: 12px;
     --fontSize-Medium: 14px;
-    --fontSize-MediumPlus: 15px;
+    --fontSize-MediumPlus: 16px;
     --fontSize-Icon: 16px;
-    --fontSize-Large: 17px;
-    --fontSize-XLarge: 21px;
+    --fontSize-Large: 18px;
+    --fontSize-XLarge: 20px;
+    --fontSize-XLargePlus: 24px;
     --fontSize-XxLarge: 28px;
+    --fontSize-XxLargePlus: 32px;
     --fontSize-SuperLarge: 42px;
-    --fontSize-Mega: 72px;
+    --fontSize-Mega: 68px;
     --fontWeight-Light: 100;
     --fontWeight-SemiLight: 300;
     --fontWeight-Regular: 400;
@@ -215,6 +230,27 @@
     --zindex-KeytipLayer: 1000001;
 }
 
+:root {
+    /*Can't be used in media queries!*/
+    --ScreenWidthMinSmall: 320px;
+    --ScreenWidthMinMedium: 480px;
+    --ScreenWidthMinLarge: 640px;
+    --ScreenWidthMinXLarge: 1024px;
+    --ScreenWidthMinXXLarge: 1366px;
+    --ScreenWidthMinXXXLarge: 1920px;
+
+    --ScreenWidthMaxSmall: 479px;
+    --ScreenWidthMaxMedium: 639px;
+    --ScreenWidthMaxLarge: 1023px;
+    --ScreenWidthMaxXLarge: 1365px;
+    --ScreenWidthMaxXXLarge: 1919px;
+}
+
+
+.smallPlusFont {
+    font-size: var(--fontSize-Small);
+    font-weight: var(--fontWeight-Regular);
+}
 .smallFont {
     font-size: var(--fontSize-Small);
     font-weight: var(--fontWeight-Regular);
@@ -225,11 +261,18 @@
 }
 .largeFont {
     font-size: var(--fontSize-Large);
-    font-weight: var(--fontWeight-SemiLight);
+    font-weight: var(--fontWeight-Regular);
+}
+.xlargeFont {
+    font-size: var(--fontSize-XLarge);
+    font-weight: var(--fontWeight-SemiBold);
 }
 
 :root {
+    --animation-DURATION_1: 0.167s;
+    --animation-DURATION_2: 0.267s;
     --animation-DURATION_3: 0.367s;
+    --animation-DURATION_4: 0.467s;
     --animation-EASING_FUNCTION_1: cubic-bezier(0.1,0.9,0.2,1);
     --animation-EASING_FUNCTION_2: cubic-bezier(0.1,0.25,0.75,0.9);
 }
@@ -298,6 +341,59 @@
         transform: translate3d(0,0,0);
     }
 }
+@keyframes Slide_left_in_40 {
+    from {
+        opacity: 0;
+        transform: translate3d(40px,0,0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
+
+
+@keyframes Slide_right_out_40 {
+    from {
+        opacity: 1;
+        transform: translate3d(0p,0,0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate3d(40px,0,0);
+    }
+}
+@keyframes Slide_left_out_40 {
+    from {
+        opacity: 1;
+        transform: translate3d(0p,0,0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate3d(-40px,0,0);
+    }
+}
+
+@keyframes Fade_in{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+@keyframes Fade_out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
 
 .slideDownIn10 {
     animation: Slide_down_in_10 var(--animation-DURATION_3) var(--animation-EASING_FUNCTION_1);
@@ -317,6 +413,34 @@
 .slideLeftIn10 {
     animation: Slide_left_in_10 var(--animation-DURATION_3) var(--animation-EASING_FUNCTION_1);
 }
+.slideLeftIn40 {
+    animation: Slide_left_in_40 var(--animation-DURATION_3) var(--animation-EASING_FUNCTION_1);
+}
+
+.slideRightOut40 {
+    animation: Slide_right_out_40 var(--animation-DURATION_3) var(--animation-EASING_FUNCTION_1);
+}
+.slideLeftOut40 {
+    animation: Slide_left_out_40 var(--animation-DURATION_3) var(--animation-EASING_FUNCTION_1);
+}
+
+.fadeIn100{
+    animation: Fade_in var(--animation-DURATION_1) var(--animation-EASING_FUNCTION_2);
+}
+.fadeOut100 {
+    animation: Fade_out var(--animation-DURATION_1) var(--animation-EASING_FUNCTION_2);
+}
+
+.fadeIn200 {
+    animation: Fade_in var(--animation-DURATION_2) var(--animation-EASING_FUNCTION_2);
+}
+.fadeOut200 {
+    animation: Fade_out var(--animation-DURATION_2) var(--animation-EASING_FUNCTION_2);
+}
+
+.fadeIn400 {
+    animation: Fade_in var(--animation-DURATION_3) var(--animation-EASING_FUNCTION_2);
+}
 
 
 body {
@@ -330,4 +454,8 @@ normalize {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+}
+
+.disabledBodyScroll{
+    overflow: hidden !important;
 }

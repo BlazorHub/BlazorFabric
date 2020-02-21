@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Components
+@inherits LayoutComponentBase
+
+   
+<Stack Horizontal="true" Style="width:100%;">
+    <ResponsiveLayout MinWidth="ResponsiveMode.Medium.ToMinCssValue()">
+        <StackItem Grow="0" DisableShrink="true" Style="height:100%;overflow:hidden;">
+            <NavMenu />
+        </StackItem>
+    </ResponsiveLayout>
+
+
+    <StackItem Grow="1" Style="overflow:hidden">
+        <Stack VerticalFill="true" Style="width:100%;">
+
+            <ResponsiveLayout MaxWidth="ResponsiveMode.Medium.ToMaxCssValue()">
+                <StackItem Grow="0" VerticalFill="false">
+                    <IconButton IconName="GlobalNavButton" OnClick=@ShowMenu />
+                </StackItem>
+            </ResponsiveLayout>
+
+            <ResponsiveLayout MinWidth="ResponsiveMode.Medium.ToMinCssValue()">
+                <StackItem Grow="0" VerticalFill="false">
+                    <div class="top-row">
+                        <a href="https://github.com/limefrogyank/BlazorFabric" target="_blank" class="ml-md-auto">View GitHub repo of BlazorFabric...</a>
+                    </div>
+                </StackItem>
+            </ResponsiveLayout>
+
+            @*<ResponsiveLayout MinWidth="0" MaxWidth="767">
+                <StackItem Grow="1" Tokens="new StackItemTokens { Padding = 5 }" Style="overflow:hidden;">
+                    <div class="content">
+                        @Body
+                    </div>
+                </StackItem>
+            </ResponsiveLayout>*@
+
+            @*<ResponsiveLayout MinWidth="768">*@
+       @* <ResponsiveWrapper>*@
+            @*<ChildContent Context="CurrentMode">*@
+                <StackItem Grow="1" Tokens="new StackItemTokens { Padding = ((int)CurrentMode <= (int)ResponsiveMode.Medium ? 10 : 0) }" Style="overflow-y:auto;">
+                    @*<div class="content">*@
+                        @Body
+                    @*</div>*@
+                </StackItem>
+            @*</ChildContent>*@
+        @*</ResponsiveWrapper>*@
+            @*</ResponsiveLayout>*@
+
+        </Stack>
+
+        <ResponsiveLayout MaxWidth="ResponsiveMode.Medium.ToMaxCssValue()">
+            <Panel Type=@PanelType.SmallFixedNear OnDismiss=@(()=>isPanelOpen = false) IsOpen=@isPanelOpen IsLightDismiss="true">
+                <NavigationTemplate>
+                    <IconButton IconName="GlobalNavButton" OnClick=@(()=> isPanelOpen = false) />
+                    <a href="https://github.com/limefrogyank/BlazorFabric" target="_blank" class="ml-md-auto">View GitHub repo of BlazorFabric...</a>
+                </NavigationTemplate>
+                <ChildContent>
+                    <NavMenu OnLinkClicked=@OnNavLinkClick />
+                </ChildContent>
+            </Panel>
+        </ResponsiveLayout>
+
+    </StackItem>
+
+</Stack>
+
+@code {
+    private bool isMenuCollapsed = true;
+    private bool isPanelOpen = false;
+
+    [CascadingParameter] public ResponsiveMode CurrentMode { get; set; }
+
+    void ShowMenu()
+    {
+        isPanelOpen = true;
+    }
+
+    void HideMenu()
+    {
+        isPanelOpen = false;
+    }
+
+    void OnNavLinkClick(NavFabricLink linkBase)
+    {
+        isPanelOpen = false;
+    }
+
+
+}

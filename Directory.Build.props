@@ -3,7 +3,7 @@
 <Project>
 
   <PropertyGroup>
-    <Authors>Lee McPherson</Authors>
+    <Authors>Multiple authors (see github repo)</Authors>
     <Owners>Lee McPherson</Owners>
     <RepositoryUrl>https://github.com/limefrogyank/BlazorFabric</RepositoryUrl>
     <PackageProjectUrl>https://github.com/limefrogyank/BlazorFabric</PackageProjectUrl>
@@ -15,15 +15,8 @@
     <IsPackable>true</IsPackable>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
 	  <PackageOutputPath>../../packages</PackageOutputPath>
-    <Version>1.2.3-preview9</Version>
+    <Version>2.1.2</Version>
   </PropertyGroup>
-
-  <!--<ItemGroup Condition="$(ProjectName.Contains('Test')) == false">
-    --><!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them --><!--
-    <EmbeddedResource Include="wwwroot\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="wwwroot\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="wwwroot\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>-->
 
   <ItemGroup Condition="$(ProjectName.Contains('Test')) == false">
     <None Include="..\..\LICENSE">
@@ -32,5 +25,10 @@
     </None>
   </ItemGroup>
   
+  <!--<ItemGroup Condition="$(ProjectName.Contains('BaseComponent')) == false" > 
+    <Content Include="..\BlazorFabric.BaseComponent\tsconfig.json">
+
+    </Content>
+  </ItemGroup>-->
 
 </Project>
