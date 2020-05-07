@@ -1,21 +1,22 @@
 ﻿@namespace BlazorFabric
 @inherits FabricComponentBase
 
+<GlobalCS Component="this" CreateGlobalCss=@(()=>CreateGlobalCss(Theme)) />
+<StylePreloader Component="new CalloutContent()" />
+<LocalCS @bind-Rules="@TooltipLocalRules" />
 
-<Callout ClassName=@($"mediumFont fadeIn200 ms-Tooltip {ClassName}")
+<Callout ClassName=@($"mediumFont fadeIn200 {TooltipRule.Selector.SelectorName} {TooltipAfterRule.Selector.SelectorName} {ClassName}")
          FabricComponentTarget=@FabricComponentTarget
          DirectionalHint=@DirectionalHint
-         Style=@($"max-width:{MaxWidth}px;{Style}")
+         Style=@($"{Style}")
          BeakWidth=@BeakWidth
          GapSpace="0"
          DoNotLayer="false"
-         IsBeakVisible="true"
-         >
-    <div class="ms-Tooltip-content smallFont"
+         IsBeakVisible="true">
+    <div class="ms-Tooltip-content"
          @onmouseenter=@OnMouseEnter
          @onmouseleave=@OnMouseLeave
-         role="tooltip"
-         >
+         role="tooltip">
         <p class="ms-Tooltip-subtext">
             @ChildContent
         </p>

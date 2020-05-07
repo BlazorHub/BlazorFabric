@@ -15,6 +15,7 @@
                 <NavLinkGroup Name="Basic Controls" CollapseByDefault="false">
                     <NavFabricLink Name="Basic" Url="" Id="/" Icon="ButtonControl" OnClick=@OnLinkClicked />
                     <NavFabricLink Name="Button" Url="buttonsPage" Id="buttonsPage" Icon="ButtonControl" OnClick=@OnLinkClicked />
+                    <NavFabricLink Name="Checkbox" Url="checkboxPage" Id="checkboxPage" Icon="CheckboxComposite" OnClick=@OnLinkClicked />
                     <NavFabricLink Name="Dropdown" Url="dropdownPage" Id="dropdownPage" Icon="Dropdown" OnClick=@OnLinkClicked />
                     <NavFabricLink Name="Label" Url="labelPage" Id="labelPage" Icon="Label" OnClick=@OnLinkClicked />
                     <NavFabricLink Name="Link" Url="linkPage" Id="linkPage" Icon="Link" OnClick="@OnLinkClicked" />
@@ -28,6 +29,13 @@
                 </NavLinkGroup>
                 <NavLinkGroup Name="Items & Lists" CollapseByDefault="false">
                     <NavFabricLink Name="List" Url="listPage" Id="listPage" Icon="List" OnClick=@OnLinkClicked />
+                    <NavFabricLink Name="DetailsList" Url="detailsListPage" Id="detailsListPage" Icon="List" OnClick=@OnLinkClicked />
+                        <NavFabricLink Name="DetailsList-Grouped" 
+                                       NestedDepth="1" 
+                                       Url="detailsListGroupedPage" 
+                                       Id="detailsListGroupedPage"
+                                       NavMatchType="NavMatchType.AnchorIncluded" />
+                    <NavFabricLink Name="GroupedList" Url="groupedListPage" Id="groupedListPage" Icon="Group" OnClick=@OnLinkClicked />
                     <NavFabricLink Name="Persona" Url="personaPage" Id="personaPage" Icon="Contact" OnClick=@OnLinkClicked />
                 </NavLinkGroup>
                 <NavLinkGroup Name="Commands, Menus & Navs" CollapseByDefault="false">

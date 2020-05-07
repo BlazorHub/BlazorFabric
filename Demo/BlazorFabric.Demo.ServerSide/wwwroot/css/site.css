@@ -5,14 +5,31 @@ html, body {
 }*/
 
 html, body, button, input, textarea {
-    font-size: 15px;
     font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing: antialiased;
+}
+html, body {
+    font-size: 15px;
 }
 body{
     margin:0;
 
 }
+    /**::-webkit-scrollbar {*/
+/*        background-color: #292827;*/
+        /*width:inherit;
+    }
+
+    *::-webkit-scrollbar-track {
+        background-color: #292827;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: #797775;
+        border-color: #292827;
+    }*/
+  
+
 
 app {
     position: relative;

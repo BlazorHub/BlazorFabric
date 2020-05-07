@@ -6,7 +6,9 @@ namespace BlazorFabric
     {
         public static void AddBlazorFabric(this IServiceCollection services)
         {
-            services.AddSingleton<IComponentStyleSheets, ComponentStyleSheets>();
+            services.AddScoped<IComponentStyle, ComponentStyle>();
+            services.AddScoped<ThemeProvider>();
+            services.AddScoped<ScopedStatics>();
         }
     }
 }

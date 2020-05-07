@@ -1,5 +1,8 @@
 ﻿@namespace BlazorFabric
 @inherits FabricComponentBase
+
+<GlobalCS Component="this" CreateGlobalCss="@CreateGlobalCss" />
+
 <div class=@($"mediumFont ms-Toggle {GetClassExtras()}") style=@Style>
     @if (!string.IsNullOrWhiteSpace(Label))
     {
@@ -10,11 +13,11 @@
     <div class="ms-Toggle-container">
         <KeytipData>
             <button class="ms-Toggle-pill"
-                    disabled=@Disabled
+                    disabled=@(Disabled || commandDisabled)
                     id=@Id
                     type="button"
                     role="switch"
-                    aria-disabled=@Disabled
+                    aria-disabled=@(Disabled || commandDisabled)
                     aria-checked=@IsChecked
                     aria-label=@AriaLabel
                     data-is-focusable="true"

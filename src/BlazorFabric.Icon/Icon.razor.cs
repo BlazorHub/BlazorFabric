@@ -7,13 +7,42 @@ using System.Threading.Tasks;
 
 namespace BlazorFabric
 {
-    public partial class Icon : FabricComponentBase
+    public partial class Icon : FabricComponentBase, IHasPreloadableGlobalStyle
     {
         [Parameter] public string IconName { get; set; }
-        //[Parameter] public string AriaLabel { get; set; }
         [Parameter] public IconType IconType { get; set; }
-        //[Parameter] protected bool IsPlaceholder { get; set; }
 
+        public ICollection<Rule> CreateGlobalCss(ITheme theme)
+        {
+            var iconRules = new HashSet<Rule>();
+            iconRules.Add(new Rule()
+            {
+                Selector = new CssStringSelector() { SelectorName = ".ms-Icon" },
+                Properties = new CssString()
+                {
+                    Css = $"display:inline-block;"
+                }
+            });
 
+            iconRules.Add(new Rule()
+            {
+                Selector = new CssStringSelector() { SelectorName = ".ms-Icon-placeHolder" },
+                Properties = new CssString()
+                {
+                    Css = $"width:1em;"
+                }
+            });
+
+            iconRules.Add(new Rule()
+            {
+                Selector = new CssStringSelector() { SelectorName = ".ms-Icon-imageContainer" },
+                Properties = new CssString()
+                {
+                    Css = $"overflow:hidden;"
+                }
+            });
+
+            return iconRules;
+        }
     }
 }

@@ -3,6 +3,15 @@
 @using Microsoft.AspNetCore.Components.Web
 @typeparam TItem
 
+<StylePreloader Component=@(new CommandButton()) />
+<StylePreloader Component=@(new Checkbox()) />
+<StylePreloader Component=@(new CalloutContent()) />
+<StylePreloader Component=@(new Panel()) />
+<StylePreloader Component="new Overlay()" />
+<StylePreloader Component="new IconButton()" />
+
+<GlobalCS Component="this" CreateGlobalCss=@(()=>CreateGlobalCss(Theme)) />
+<LocalCS @bind-Rules="@DropdownLocalRules" />
 <div class="ms-Dropdown-root"
      style=@Style
      @ref=@RootElementReference>
@@ -27,7 +36,7 @@
              @onclick=@ClickHandler
              @onkeydown=@KeydownHandler
              @onfocus=@FocusHandler
-             class=@($"ms-Dropdown mediumFont {(isOpen?"is-open":"")} {(this.Label!=null ? "has-label" : "")} {(Disabled?"is-disabled":"")} {(Required?"is-required":"")} {(SelectedKeys.Count == 0 ?"has-placeholder":"")} {(ErrorMessage != null ?"has-error":"")}")>
+             class=@($"ms-Dropdown mediumFont {(isOpen?"is-open":"")} {(this.Label!=null ? "has-label" : "")} {(Disabled?"is-disabled":"")} {(Required?"is-required":"")} {(SelectedKeys.Count == 0 && SelectedKey == null ?"has-placeholder":"")} {(ErrorMessage != null ?"has-error":"")}")>
             <span id=@($"{id}-option")
                   class="ms-Dropdown-title"
                   aria-atomic="true"
@@ -53,37 +62,39 @@
             </span>
         </div>
     </KeytipData>
+
+    <Panel IsOpen=@((int)CurrentMode <= (int)ResponsiveMode.Medium && isOpen) IsLightDismiss="true" OnDismiss=@DismissHandler HasCloseButton="false">
+        <div class="ms-Dropdown-itemsWrapper"
+             @ref="panelReference"
+             tabindex="0">
+            @*FocusZone has no Role=listbox *@
+            <FocusZone Direction="FocusZoneDirection.Vertical"
+                       ClassName="ms-Dropdown-dropdownItems"
+                       AriaLabel=@($"{id}-label")>
+
+                <CascadingValue Value=@this>
+                    @if (ItemsSource != null)
+                    {
+                        foreach (var item in ItemsSource)
+                        {
+                            @ItemTemplate(item)
+                        }
+                    }
+                    else
+                    {
+                        @ChildContent
+                    }
+                </CascadingValue>
+
+            </FocusZone>
+        </div>
+    </Panel>
     @if (isOpen)
     {
         //render container
         @if ((int)CurrentMode <= (int)ResponsiveMode.Medium)
         {
-            <Panel IsOpen="true" IsLightDismiss="true" OnDismiss=@DismissHandler HasCloseButton="false">
-                <div class="ms-Dropdown-itemsWrapper"
-                     @ref="panelReference"
-                     tabindex="0">
-                    @*FocusZone has no Role=listbox *@
-                    <FocusZone Direction="FocusZoneDirection.Vertical"
-                               ClassName="ms-Dropdown-dropdownItems"
-                               AriaLabel=@($"{id}-label")>
 
-                        <CascadingValue Value=@this>
-                            @if (ItemsSource != null)
-                            {
-                                foreach (var item in ItemsSource)
-                                {
-                                    @ItemTemplate(item)
-                                }
-                            }
-                            else
-                            {
-                                @ChildContent
-                            }
-                        </CascadingValue>
-
-                    </FocusZone>
-                </div>
-            </Panel>
         }
         else
         {
@@ -126,7 +137,7 @@
     }
     @if (ErrorMessage != null)
     {
-        <div class="ms-Dropdown-errorMessage smallFont">@ErrorMessage</div>
+        <div class="ms-Dropdown-errorMessage">@ErrorMessage</div>
     }
 
 

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorFabric
@@ -46,5 +45,46 @@ namespace BlazorFabric
             return base.OnParametersSetAsync();
         }
 
+        private ICollection<Rule> CreateGlobalCss()
+        {
+            var overflowSetRules = new HashSet<Rule>();
+            overflowSetRules.Add(new Rule()
+            {
+                Selector = new CssStringSelector() { SelectorName = ".ms-OverflowSet" },
+                Properties = new CssString()
+                {
+                    Css = $"position:relative;" +
+                            $"display:flex;" +
+                            $"flex-wrap:nowrap;"
+                }
+            });
+            overflowSetRules.Add(new Rule()
+            {
+                Selector = new CssStringSelector() { SelectorName = ".ms-OverflowSet--vertical" },
+                Properties = new CssString()
+                {
+                    Css = $"flex-direction:column;"
+                }
+            });
+            overflowSetRules.Add(new Rule()
+            {
+                Selector = new CssStringSelector() { SelectorName = ".ms-OverflowSet-item" },
+                Properties = new CssString()
+                {
+                    Css = $"flex-shrink:0;" +
+                            $"display:inherit;"
+                }
+            });
+            overflowSetRules.Add(new Rule()
+            {
+                Selector = new CssStringSelector() { SelectorName = ".ms-OverflowSet-overflowButton" },
+                Properties = new CssString()
+                {
+                    Css = $"flex-shrink:0;" +
+                            $"display:inherit;"
+                }
+            });
+            return overflowSetRules;
+        }
     }
 }

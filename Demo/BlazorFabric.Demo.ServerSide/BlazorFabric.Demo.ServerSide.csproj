@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\BlazorFabric.Theme\BlazorFabric.FabricTheme.csproj" />
     <ProjectReference Include="..\BlazorFabric.Demo.Shared\BlazorFabric.Demo.Shared.csproj" />
   </ItemGroup>
 

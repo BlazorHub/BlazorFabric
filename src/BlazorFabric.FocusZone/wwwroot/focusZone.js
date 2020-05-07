@@ -1,4 +1,4 @@
-/// <reference path="baseComponent.d.ts" />
+/// <reference path="../../BlazorFabric.BaseComponent/wwwroot/baseComponent.ts" />
 var BlazorFabricFocusZone;
 (function (BlazorFabricFocusZone) {
     var FocusZoneDirection;
@@ -778,5 +778,9 @@ var BlazorFabricFocusZone;
         return FocusZoneInternal;
     }());
 })(BlazorFabricFocusZone || (BlazorFabricFocusZone = {}));
-window.BlazorFabricFocusZone = BlazorFabricFocusZone;
+//interface Window {
+//    BlazorFabricFocusZone: typeof BlazorFabricFocusZone
+//}
+//window.BlazorFabricFocusZone = BlazorFabricFocusZone;
+window['BlazorFabricFocusZone'] = BlazorFabricFocusZone || {};
 //# sourceMappingURL=focusZone.js.map

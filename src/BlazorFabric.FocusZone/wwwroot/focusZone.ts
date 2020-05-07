@@ -1,4 +1,4 @@
-/// <reference path="baseComponent.d.ts" />
+/// <reference path="../../BlazorFabric.BaseComponent/wwwroot/baseComponent.ts" />
 
 namespace BlazorFabricFocusZone {
     interface Set<T> {
@@ -1027,10 +1027,10 @@ namespace BlazorFabricFocusZone {
     }
 }
 
-    interface Window {
-        BlazorFabricFocusZone: typeof BlazorFabricFocusZone
-    }
+    //interface Window {
+    //    BlazorFabricFocusZone: typeof BlazorFabricFocusZone
+    //}
 
 
-window.BlazorFabricFocusZone = BlazorFabricFocusZone;
-
+//window.BlazorFabricFocusZone = BlazorFabricFocusZone;
+(<any>window)['BlazorFabricFocusZone'] = BlazorFabricFocusZone || {};

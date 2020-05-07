@@ -1,6 +1,9 @@
 ﻿@namespace BlazorFabric
 @inherits FabricComponentBase
 
+<StylePreloader Component="new Tooltip()" />
+<GlobalCS Component="this" CreateGlobalCss=@(()=>CreateGlobalCss(Theme)) />
+
 
 <div class=@($"ms-TooltipHost {ClassName}")
      style=@Style
@@ -18,8 +21,7 @@
         <Tooltip DirectionalHint=@DirectionalHint
                  FabricComponentTarget=@TargetElement
                  OnMouseLeave=@OnTooltipMouseEnter
-                 OnMouseEnter=@OnTooltipMouseLeave
-                 >
+                 OnMouseEnter=@OnTooltipMouseLeave>
             @TooltipContent
         </Tooltip>
     }

@@ -3,13 +3,12 @@ using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
 namespace BlazorFabric
 {
-    public partial class TooltipHost : FabricComponentBase, IDisposable
+    public partial class TooltipHost : FabricComponentBase, IDisposable, IHasPreloadableGlobalStyle
     {
         private static TooltipHost CurrentVisibleTooltip { get; set; }
 
@@ -20,7 +19,7 @@ namespace BlazorFabric
         //[Parameter] public FabricComponentBase FabricComponentTarget { get; set; }
         [Parameter] public string HostClassName { get; set; }
         [Parameter] public EventCallback<bool> OnTooltipToggle { get; set; }
-        [Parameter] public TooltipOverflowMode OverflowMode { get; set; } = TooltipOverflowMode.None;  
+        [Parameter] public TooltipOverflowMode OverflowMode { get; set; } = TooltipOverflowMode.None;
         [Parameter] public FabricComponentBase Parent { get; set; }
         [Parameter] public bool SetAriaDescribedBy { get; set; }
         [Parameter] public RenderFragment TooltipContent { get; set; }
@@ -34,10 +33,6 @@ namespace BlazorFabric
         private Timer _openTimer;
         private Timer _dismissTimer;
 
-        public TooltipHost()
-        {
-            
-        }
 
         protected override void OnInitialized()
         {
@@ -115,7 +110,7 @@ namespace BlazorFabric
             {
                 ToggleTooltip(true);
             }
-            
+
             return Task.CompletedTask;
         }
 
@@ -189,6 +184,20 @@ namespace BlazorFabric
                 default:
                     return 0;
             }
+        }
+
+        public ICollection<Rule> CreateGlobalCss(ITheme theme)
+        {
+            var tooltipHostRules = new HashSet<Rule>();
+            tooltipHostRules.Add(new Rule()
+            {
+                Selector = new CssStringSelector() { SelectorName = ".ms-TooltipHost" },
+                Properties = new CssString()
+                {
+                    Css = $"display:inline;"
+                }
+            });
+            return tooltipHostRules;
         }
 
         public void Dispose()
